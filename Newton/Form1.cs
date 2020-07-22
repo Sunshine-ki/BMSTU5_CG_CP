@@ -67,8 +67,6 @@ namespace Newton
 			{
 				_mode = Mode.Off;
 				aTimer.Stop();
-				// TODO: Тут должен быть остановка изображения, 
-				// либо вернуть его в начальное положение.
 			}
 
 			Console.WriteLine("Yes!");
