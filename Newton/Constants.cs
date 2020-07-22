@@ -8,4 +8,20 @@ namespace Newton
 		HeightCanvas = 700
 
 	}
+
+	public enum Mode
+	{
+		Off,
+		On
+	}
+
+	public enum State
+	{
+		Start,
+		MovingUpRight,
+		MovingDownRight,
+		MovingUpLeft,
+		MovingDownLeft
+
+	}
 }
