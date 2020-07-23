@@ -13,6 +13,7 @@ namespace Newton
 		private PictureBox _imgBox;
 		Mode _mode;
 		State _state;
+		Bitmap _img; // Содержит растровое изображение.
 		public Form1(List<Shape> scene)
 		{
 			SettingsWindows();
@@ -20,6 +21,7 @@ namespace Newton
 			_imgBox = new PictureBox();
 			_imgBox.Size = new Size((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 			this.Controls.Add(_imgBox);
+			_img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 			// _imgBox.Image = _img;
 			_mode = Mode.Off;
 			_scene = scene;
@@ -161,27 +163,27 @@ namespace Newton
 			_imgBox.Image = RayTracing();
 		}
 
-
-
-
 		private Bitmap RayTracing()
 		{
-			// Содержит растровое изображение.
-			Bitmap img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
+			// _imgBox.Image.Dispose();
+
 
 			// for (int i = 0; i < (int)SizeObjects.WidthCanvas; i++)
 			// {
 			// 	for (int j = 0; j < (int)SizeObjects.HeightCanvas; j++)
 			// 	{
-			// 		img.SetPixel(i, j, Color.Black);
+			// 		_img.SetPixel(i, j, Color.Black);
 			// 		// Color curPixColor = img.GetPixel(i, j);
 			// 	}
 			// }
 
 			// FIXME: Потом graphics не будет.
-			Graphics graphics = Graphics.FromImage(img);
+			Graphics graphics = Graphics.FromImage(_img);
 			RectangleF rectangle;
 			float radius;
+
+
+			graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, (int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas));
 
 			foreach (var elem in _scene)
 			{
@@ -192,7 +194,7 @@ namespace Newton
 				graphics.FillEllipse(new SolidBrush(Color.Red), rectangle);
 			}
 
-			return img;
+			return _img;
 
 		}
 	}
