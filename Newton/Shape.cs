@@ -1,10 +1,12 @@
 using System;
 using System.Drawing;
+using System.Windows;
 
 namespace Newton
 {
 	public class Shape
 	{
+		Vector _centerVec;
 		protected PointF _center; // { get; set; } // = new PointF(0, 0);
 		protected Color _clr;
 		public PointF Center
@@ -15,6 +17,8 @@ namespace Newton
 			set { _center = value; }
 		}
 		public Shape(PointF center, Color color) { _center = center; _clr = color; }
+		public Shape(Vector centerVec, Color color) { _centerVec = centerVec; _clr = color; }
+
 
 
 		// FIXME: Убрать этот метод.

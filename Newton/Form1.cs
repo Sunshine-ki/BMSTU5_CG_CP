@@ -61,7 +61,7 @@ namespace Newton
 			if (_mode == Mode.Off)
 			{
 				_mode = Mode.On;
-				aTimer = new System.Timers.Timer(2000);
+				aTimer = new System.Timers.Timer(500);
 				aTimer.Elapsed += OnTimedEvent;
 				aTimer.AutoReset = true;
 				aTimer.Enabled = true;
@@ -160,65 +160,43 @@ namespace Newton
 				default:
 					return;
 			}
-
-			_imgBox.Image = RayTracing();
+			draw_scene();
 		}
 
-		private Bitmap RayTracing()
+		private void draw_scene()
 		{
-			// _imgBox.Image.Dispose();
 			Graphics graphics = Graphics.FromImage(_img);
 			graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, (int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas));
-
-			float radius;
-			double distance;
 			for (int i = 0; i < (int)SizeObjects.WidthCanvas; i++)
 			{
 				for (int j = 0; j < (int)SizeObjects.HeightCanvas; j++)
 				{
-					foreach (var elem in _scene)
-					{
-						// TODO: Вынести это в функцию, которая просто будет возвращать
-						// true or false в зависимости от того, находится ли пиксель
-						// Внутри области или нет. 
-						// Также избавиться от точечного синтаксиса.
-						radius = (elem as Sphere).Radius;
-						distance = Math.Sqrt(Math.Pow(elem.Center.X - i, 2.0d) + Math.Pow(elem.Center.Y - j, 2.0d));
-						if (distance <= radius)
-							_img.SetPixel(i, j, Color.Red); //Color.FromArgb(255, 255, 255));
-
-
-					}
-					// Color curPixColor = img.GetPixel(i, j);
+					TraceRay(i, j);
 				}
 			}
-
-			// bool IsVisible()
-			// {
-
-			// }
-
-			// FIXME: Потом graphics не будет.
-			// Graphics graphics = Graphics.FromImage(_img);
-			// RectangleF rectangle;
-			// float radius;
-
-
-			// graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, (int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas));
-
-			// foreach (var elem in _scene)
-			// {
-			// 	radius = (elem as Sphere).Radius;
-			// 	rectangle = new RectangleF(new PointF(elem.Center.X - radius, elem.Center.Y - radius), new SizeF(2 * radius, 2 * radius));
-			// 	// Объект PointF, представляющий левый верхний угол прямоугольной области.
-			// 	// Объект SizeF, представляющий ширину и высоту прямоугольной области.
-			// 	graphics.FillEllipse(new SolidBrush(Color.Red), rectangle);
-			// }
-
-			// TODO: Нужно ли возвращать ? Привязать вначале и все...
-
-			return _img;
-
+			_imgBox.Image = _img;
 		}
+
+
+		private void TraceRay(int i, int j)
+		{
+			float radius;
+			double distance;
+			foreach (var elem in _scene)
+			{
+				// TODO: Вынести это в функцию, которая просто будет возвращать
+				// true or false в зависимости от того, находится ли пиксель
+				// Внутри области или нет. 
+				// Также избавиться от точечного синтаксиса.
+				radius = (elem as Sphere).Radius;
+				distance = Math.Sqrt(Math.Pow(elem.Center.X - i, 2.0d) + Math.Pow(elem.Center.Y - j, 2.0d));
+				if (distance <= radius)
+					_img.SetPixel(i, j, Color.White); //Color.FromArgb(255, 255, 255));
+			}
+		}
+		// private bool IsVisible()
+		// {
+
+		// }
 	}
 }
