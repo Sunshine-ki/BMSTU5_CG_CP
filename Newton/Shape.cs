@@ -6,38 +6,42 @@ namespace Newton
 {
 	public class Shape
 	{
-		Vector _centerVec;
-		protected PointF _center; // { get; set; } // = new PointF(0, 0);
+		protected Vector _center;
 		protected Color _clr;
-		public PointF Center
+		public Vector Center
 		{
 			get { return _center; }
-			// TODO: Сделать проверку, выходит ли значение 
-			// за пределы экрана. 
 			set { _center = value; }
 		}
-		public Shape(PointF center, Color color) { _center = center; _clr = color; }
-		public Shape(Vector centerVec, Color color) { _centerVec = centerVec; _clr = color; }
+		public Color Clr
+		{
+			get { return _clr; }
+		}
+		public Shape() { _clr = Color.Black; }
+		public Shape(Vector center, Color clr) { _center = center; _clr = clr; }
 
+		// FIXME: Убрать потом print.
+		public virtual void print()
+		{
+			Console.WriteLine("Center = " + _center.X + " " + _center.Y + " " + _center.Z + " " + "\nColor = " + _clr);
+		}
 
-
-		// FIXME: Убрать этот метод.
-		public virtual void print() { }
 	}
 
 	public class Sphere : Shape
 	{
-		private float _radius;
-		public float Radius
+		private double _radius;
+		public double Radius
 		{
 			get { return _radius; }
 		}
+		public Sphere(Vector center, double radius, Color color) : base(center, color) => _radius = radius;
 
-		public Sphere(PointF center, float radius, Color color) : base(center, color) => _radius = radius;
-
+		// FIXME: Убрать потом print.
 		public override void print()
 		{
-			Console.WriteLine("R = " + _radius + " " + _center + " ");
+			base.print();
+			Console.WriteLine("Radius = " + _radius + "\n\n");
 		}
 	}
 }

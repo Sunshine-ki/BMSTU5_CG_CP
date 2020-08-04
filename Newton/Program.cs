@@ -9,29 +9,28 @@ namespace Newton
 	static class Program
 	{
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
 			// Применяем стили операционной системы к приложению.
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			// Создаем экземпляр формы и запускаем его.
-			Application.Run(new Form1(CreateScene("data/scene.txt")));
+			Application.Run(new MainForm(CreateScene(args[0])));
 		}
+
 		static List<Shape> CreateScene(string path)
 		{
 			List<Shape> scene = new List<Shape>();
-			float xCenter, yCenter, r;
+			string[] param;
 
-			// scene[0].print();
 			foreach (string line in File.ReadLines(path))
 			{
-				string[] param = line.Split(' ');
-				if (param.Length != 3)
+				param = line.Split(' ');
+				if (param.Length != 5)
 					continue;
-				xCenter = Convert.ToSingle(param[0]);
-				yCenter = Convert.ToSingle(param[1]);
-				r = Convert.ToSingle(param[2]);
-				scene.Add(new Sphere(new PointF(xCenter, yCenter), r, Color.Black));
+				scene.Add(new Sphere(new Vector(Convert.ToDouble(param[0]),
+					Convert.ToDouble(param[1]), Convert.ToDouble(param[2])),
+					Convert.ToDouble(param[3]), Color.FromName(param[4])));
 			}
 
 			return scene;
