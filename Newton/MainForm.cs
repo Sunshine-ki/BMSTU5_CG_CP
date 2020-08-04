@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
+// TODO: Добавить класс Color
+
 namespace Newton
 {
 	public class MainForm : Form
@@ -14,6 +16,11 @@ namespace Newton
 		private Bitmap _img; // Содержит растровое изображение.
 		private PictureBox _imgBox; // Будет сожержать само изображение.
 		private System.Timers.Timer _timer; // Частота кадров.
+
+		// 
+		private Light _light;
+		//
+
 		public MainForm(List<Shape> scene)
 		{
 			SettingsWindows();
@@ -21,6 +28,10 @@ namespace Newton
 			_scene = scene;
 			_state = State.Start;
 			_mode = Mode.Off;
+
+			//
+			_light = new Light(new Vector(2, 1, 0), 0.6);
+			//
 		}
 
 		#region SETTINGS
@@ -129,23 +140,23 @@ namespace Newton
 			// 	new Rectangle(0, 0, (int)SizeObjects.WidthCanvas,
 			//  						(int)SizeObjects.HeightCanvas));
 			Color clr;
-			for (int i = 0; i < (int)SizeObjects.WidthCanvas; i++)
-				for (int j = 0; j < (int)SizeObjects.HeightCanvas; j++)
+			for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
+				for (Int32 j = 0; j < (int)SizeObjects.HeightCanvas; j++)
 				{
-					clr = TraceRay(i, j);
+					clr = TraceRay(new Point(i, j));
 					_img.SetPixel(i, j, clr); //Color.FromArgb(255, 255, 255));
 				}
 
 			_imgBox.Image = _img;
 		}
 
-		private Color TraceRay(int i, int j)
+		private Color TraceRay(Point point)
 		{
 			Shape ClosestObject = null;
 			double MinZ = Double.NegativeInfinity;
 			foreach (var elem in _scene)
 			{
-				if (IsVisible((elem as Sphere).Radius, elem.Center.X - i, elem.Center.Y - j))
+				if (IsVisible((elem as Sphere).Radius, elem.Center.X - point.X, elem.Center.Y - point.Y))
 				{
 					if (elem.Center.Z > MinZ)
 					{
@@ -154,14 +165,30 @@ namespace Newton
 					}
 				}
 			}
-			return ClosestObject == null ? Color.Black : ClosestObject.Clr;
+
+			return ClosestObject == null ? Color.Black : test(ClosestObject, new Vector(point.X, point.Y, ClosestObject.Center.Z));
 		}
 		private bool IsVisible(double R, double dx, double dy)
 		{
-			// double distance = Math.Pow(dx, 2.0d) + Math.Pow(dy, 2.0d);
 			if (Math.Pow(dx, 2.0d) + Math.Pow(dy, 2.0d) <= R * R)
 				return true;
 			return false;
 		}
+		private Color test(Shape Obj, Vector point)
+		{
+			Color result = Obj.Clr;
+
+			Vector Normal = point - Obj.Center;
+			Normal = Normal / Normal.Length;
+
+			// Color Intensity = ComputeLighting(point, Normal) * Obj.Clr;
+
+			return result;
+		}
+
+		// private double ComputeLighting(Vector point, Vector Normal)
+		// {
+		// 	return 0d;
+		// }
 	}
 }

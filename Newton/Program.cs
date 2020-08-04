@@ -20,6 +20,10 @@ namespace Newton
 
 		static List<Shape> CreateScene(string path)
 		{
+			// Color c = Color.Blue;
+			// Console.WriteLine(Color.Multiply(c, 2));
+
+
 			List<Shape> scene = new List<Shape>();
 			string[] param;
 
