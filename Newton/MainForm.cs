@@ -150,7 +150,9 @@ namespace Newton
 			if (ClosestObject == null)
 				return Color.Black;
 
-			return Color.FromArgb(result.R, result.G, result.B);
+			Colors ColorsResult = ClosestObject.Clr;
+			// TODO: Тут дальше должно быть освещение и работа с color.
+			return Color.FromArgb(ColorsResult.R, ColorsResult.G, ColorsResult.B);
 		}
 		private bool IsVisible(double R, double dx, double dy)
 		{
