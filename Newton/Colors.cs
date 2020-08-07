@@ -6,7 +6,7 @@ namespace Newton
 	public class Colors
 	{
 		private byte _r, _g, _b;
-
+		public Colors() { _r = _g = _b = 0; }
 		public Colors(byte R, byte G, byte B) { _r = R; _g = G; _b = B; }
 		public Colors(string str)
 		{

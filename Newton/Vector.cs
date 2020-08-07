@@ -26,8 +26,6 @@ namespace Newton
 		public static Vector operator /(Vector a, Vector b) => new Vector(a.X / b.X, a.Y / b.Y, a.Z / b.Z);
 		public static Vector operator /(Vector a, double num) => new Vector(a.X / num, a.Y / num, a.Z / num);
 
-
-
 		public double DotProduct(Vector vector) => _x * vector.X + _y * vector.Y + _z * vector.Z;
 
 		// Поворот по часовой стрелке.

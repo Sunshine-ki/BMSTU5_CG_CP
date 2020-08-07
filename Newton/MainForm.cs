@@ -4,8 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-// TODO: Добавить класс Color
-
 namespace Newton
 {
 	public class MainForm : Form
@@ -17,10 +15,6 @@ namespace Newton
 		private PictureBox _imgBox; // Будет сожержать само изображение.
 		private System.Timers.Timer _timer; // Частота кадров.
 
-		// 
-		private Light _light;
-		//
-
 		public MainForm(List<Shape> scene)
 		{
 			SettingsWindows();
@@ -28,10 +22,6 @@ namespace Newton
 			_scene = scene;
 			_state = State.Start;
 			_mode = Mode.Off;
-
-			//
-			_light = new Light(new Vector(2, 1, 0), 0.6);
-			//
 		}
 
 		#region SETTINGS
@@ -134,19 +124,9 @@ namespace Newton
 
 		private void DrawScene()
 		{
-			// // Задний фон - черный.
-			// Graphics graphics = Graphics.FromImage(_img);
-			// graphics.FillRectangle(new SolidBrush(Color.Black),
-			// 	new Rectangle(0, 0, (int)SizeObjects.WidthCanvas,
-			//  						(int)SizeObjects.HeightCanvas));
-			Color clr;
 			for (Int32 i = 0; i < (int)SizeObjects.WidthCanvas; i++)
 				for (Int32 j = 0; j < (int)SizeObjects.HeightCanvas; j++)
-				{
-					clr = TraceRay(new Point(i, j));
-					_img.SetPixel(i, j, clr); //Color.FromArgb(255, 255, 255));
-				}
-
+					_img.SetPixel(i, j, TraceRay(new Point(i, j)));
 			_imgBox.Image = _img;
 		}
 
@@ -154,6 +134,7 @@ namespace Newton
 		{
 			Shape ClosestObject = null;
 			double MinZ = Double.NegativeInfinity;
+
 			foreach (var elem in _scene)
 			{
 				if (IsVisible((elem as Sphere).Radius, elem.Center.X - point.X, elem.Center.Y - point.Y))
@@ -166,7 +147,10 @@ namespace Newton
 				}
 			}
 
-			return ClosestObject == null ? Color.Black : test(ClosestObject, new Vector(point.X, point.Y, ClosestObject.Center.Z));
+			if (ClosestObject == null)
+				return Color.Black;
+
+			return Color.FromArgb(result.R, result.G, result.B);
 		}
 		private bool IsVisible(double R, double dx, double dy)
 		{
@@ -174,21 +158,6 @@ namespace Newton
 				return true;
 			return false;
 		}
-		private Color test(Shape Obj, Vector point)
-		{
-			Color result = Obj.Clr;
 
-			Vector Normal = point - Obj.Center;
-			Normal = Normal / Normal.Length;
-
-			// Color Intensity = ComputeLighting(point, Normal) * Obj.Clr;
-
-			return result;
-		}
-
-		// private double ComputeLighting(Vector point, Vector Normal)
-		// {
-		// 	return 0d;
-		// }
 	}
 }

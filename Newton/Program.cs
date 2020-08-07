@@ -20,21 +20,17 @@ namespace Newton
 
 		static List<Shape> CreateScene(string path)
 		{
-			// Color c = Color.Blue;
-			// Console.WriteLine(Color.Multiply(c, 2));
-
-
 			List<Shape> scene = new List<Shape>();
 			string[] param;
 
 			foreach (string line in File.ReadLines(path))
 			{
 				param = line.Split(' ');
-				if (param.Length != 5)
+				if (param.Length != 7)
 					continue;
 				scene.Add(new Sphere(new Vector(Convert.ToDouble(param[0]),
 					Convert.ToDouble(param[1]), Convert.ToDouble(param[2])),
-					Convert.ToDouble(param[3]), Color.FromName(param[4])));
+					Convert.ToDouble(param[3]), new Colors(Convert.ToByte(param[4]), Convert.ToByte(param[5]), Convert.ToByte(param[6]))));
 			}
 
 			return scene;
