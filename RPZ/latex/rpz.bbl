@@ -1,0 +1,53 @@
+\begin{thebibliography}{1}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{bib2}
+\selectlanguageifdefined{english}
+\BibEmph{Дымченко,~Лев}. Пример реализации в
+  реальном времени метода трассировки
+  лучей: необычные возможности и принцип
+  работы. Оптимизация под SSE~/ Лев~Дымченко.
+  ---
+\newblock ixbt, 2001. --- 11. \BibUrl{
+  https://www.ixbt.com/video/rt-raytracing.shtml}.
+
+\bibitem{bib6}
+\selectlanguageifdefined{english}
+Learn Computer Graphics From Scratch! ---
+\newblock 2000-2016. \BibUrl{
+  https://www.scratchapixel.com/index.php?redirect}.
+
+\bibitem{bib1}
+\selectlanguageifdefined{english}
+\BibEmph{Роджерс,~Д.} Алгоритмические основы
+  машинной графики~/ Д.~Роджерс. ---
+\newblock Москва <<Мир>>, 1989. ---
+\newblock P.~512.
+
+\bibitem{bib3}
+\selectlanguageifdefined{english}
+\BibEmph{А.,~Боресков}. Программирование
+  компьютерной графики~/ Боресков~А. ---
+\newblock ДМК Пресс, 2019. ---
+\newblock P.~370.
+
+\bibitem{bib4}
+\selectlanguageifdefined{english}
+Ray tracing. ---
+\newblock Wikipedia, 2015. \BibUrl{
+  https://en.wikipedia.org/wiki/Ray_tracing_(graphics)}.
+
+\bibitem{bib5}
+\selectlanguageifdefined{english}
+\BibEmph{Ю.М.Баяковский}. Трассировка лучей из
+  книги Джефа Проузиса~/ ~Ю.М.Баяковский. ---
+\newblock 1999. \BibUrl{
+  https://www.graphicon.ru/oldgr/courses/cg99/notes/lect12/prouzis/raytrace.htm}.
+
+\end{thebibliography}
