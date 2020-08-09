@@ -210,7 +210,6 @@
 		\includegraphics[width=0.6\textwidth]{img/warnock_algorithm_types.png}
 		\caption{Классификация многоугольников в Алгоритме Варнока}
 		\label{fig:ref}}
-	
 \end{figure}
 
 К недостаткам алгоритма также можно отнести невозможность передачи зеркальных эффектов и преломления света. Также при визуализации сложной сцены число разбиений может стать очень большим, что приведет к ухудшению скорости.
@@ -278,6 +277,211 @@
 Глобальная модель воспроизводит чрезвычайно важные эффекты, которые будут показаны в данном проекте.
 
 %Таким образом, глобальная модель освещения является частью алгоритмов выделения видимых поверхностей путём трассировки лучей.
+
+\section {Преобразования}
+
+\subsection {Некоторые теоретические сведения}
+
+Преобразования на плоскости - изменение значений точек на плоскости:
+
+\begin{equation}
+A(x,y)\rightarrow B(x_1,y_1)
+\end{equation}
+
+Линейное преобразование:
+
+\begin{equation}
+{\begin{cases} 
+	x_1 = Ax + By + C  \\
+	y_1 = Dx + Ey + F  \\
+	\end{cases}}
+\end{equation}
+
+Однородные координаты:
+
+\begin{equation}
+(x, y, w)
+\end{equation}
+
+Где w - масштабный множитель (для плоского случая w = 1), в обратном случае:
+
+\begin{equation}
+{\begin{cases} 
+	x' = x / w  \\
+	y' = y / w.  \\
+	\end{cases}}
+\end{equation}
+
+Матрица преобразований:
+
+\begin{equation}
+Mtr = \left(
+\begin{array}{cccc}
+A & D & 0 \\
+B & E & 0 \\
+C & F & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+Тогда, используя однородные координаты и матрицу преобразования, мы можем получить результат преобразования:
+
+\begin{equation}
+(x_1, y_1, 1) = (x, y, 1) * Mtr
+\end{equation}
+
+Методы двумерных преобразований распространяются и на изображения трехмерных объектов. Матрица преобразований  в трехмерном пространстве  в однородных координатах будет иметь размерность 4*4, а точки (x, y, z) заменяются четверткой (xw, yw, zw, w), w ≠ 0
+
+\subsection {Перенос}
+
+Для переноса нам потребуется два параметра: dx - смещение по оси абсцисс и dy - смещение по оси ординат.
+
+\begin{equation}
+{\begin{cases} 
+	x_1 = x + dx  \\
+	y_1 = y + dy  \\
+	\end{cases}}
+\end{equation}
+
+Матрица переноса в двухмерном пространстве:
+
+\begin{equation}
+Mmove = \left(
+\begin{array}{cccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+dx & dy & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+Матрица переноса в трехмерном пространстве:
+
+\begin{equation}
+Mmove = \left(
+\begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+dx & dy & dz & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+\subsection {Масштабирование}
+
+Масштабирование - изменение размера. Задается коэффициентами масштабирования kx, ky и центром масштабирования xm, ym. Иллюстрация представлена на рисунке \ref{fig:ref1} \\
+\begin{figure}[ht!]
+	\centering{
+		\includegraphics[width=0.6\textwidth]{img/move.jpg}
+		\caption{Перемещение точки}
+		\label{fig:ref1}}
+\end{figure} 
+\\
+kx = ky - масштабирование однородное.\\
+kx != ky - масштабирование неоднородное.\\
+Отражение относительно OY: kx = -1, ky = 1.\\
+Отражение относительно OX: kx = 1, ky = -1.\\
+Отражение относительно начала координат: kx = -1, ky = -1.\\
+Если коэффициент масштабирования больше 1, то изображение удаляется от центра и увеличивается.\\
+Если коэффициент масштабирование меньше 1, то изображение приближается от центра и уменьшается.\\
+
+Из Рис. \ref{fig:ref1} получаем:
+
+\begin{equation}
+{\begin{cases} 
+	x_1 - x_m = kx(x - x_m)  \\
+	y_1 - y_m = ky(y - y_m)  \\
+	\label{eq:ref4}
+	\end{cases}}
+\end{equation}
+
+Упростим (\ref{eq:ref4}) и получим: 
+
+\begin{equation}
+{\begin{cases} 
+x_1 = kx * x + (1 - kx) * x_m \\
+y_1 = ky * y + (1 - ky) * y_m \\
+	\end{cases}}
+\end{equation}
+
+Матрица масштабирования в двухмерном пространстве:
+
+\begin{equation}
+Mscale = \left(
+\begin{array}{cccc}
+kx & 0 & 0 \\
+0 & ky & 0 \\
+0 & 0 & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+Матрица масштабирования в трехмерном пространстве (Добавляется коэффициентами масштабирования: kz):
+
+\begin{equation}
+Mscale = \left(
+\begin{array}{cccc}
+kx & 0 & 0 & 0 \\
+0 & ky & 0 & 0 \\
+0 & 0 & kz & 0 \\
+0 & 0 & 0 & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+\subsection {Поворот}
+
+Для поворота нам потребуется угол  $\theta$ и центр C(xc, yc).
+\begin{figure}[ht!]
+	\centering{
+		\includegraphics[width=0.6\textwidth]{img/rotate.jpg}
+		\caption{Поворот точки}
+		\label{fig:ref2}}
+\end{figure} 
+
+Вывод поворота против часовой стрелки:
+
+\begin{multline}
+\\
+x_1 = x_c + R*cos(180^{\circ}-(\varphi +  \theta)) = \\
+x_c - R*cos(\varphi)*cos(\theta) + R*sin(\varphi)*sin(\theta) = \\ 
+x_c - (x_c - x)cos(\theta) + (y - y_c)sin(\theta) = \\ 
+x_c + (x - x_c)cos(\theta) + (y - y_c)sin(\theta) \\
+\end{multline}
+
+\begin{multline}
+\\
+y_1 = y_c + R*sin(180^{\circ}-(\varphi +  \theta)) = \\
+y_c + R*sin(\varphi)*cos(\theta) + R*cos(\varphi)*sin(\theta) = \\ 
+y_c + (y - y_c)cos(\theta) + (x_c- x)sin(\theta) = \\ 
+y_c + (y - y_c)cos(\theta) - (x - x_c)sin(\theta) \\
+\end{multline}
+
+Матрица поворота против часовой стрелки в двухмерном пространстве:
+
+\begin{equation}
+Mrotate = \left(
+\begin{array}{cccc}
+cos(\theta) & -sin(\theta) & 0 \\
+sin(\theta) & cos(\theta) & 0 \\
+0 & 0 & 1 \\
+\end{array}
+\right)
+\end{equation}
+
+Матрица поворота в трехмерном пространстве вокруг оси Z :
+
+\begin{equation}
+Mrotate = \left(
+\begin{array}{cccc}
+cos(\theta) & -sin(\theta) & 0 & 0 \\
+sin(\theta) & cos(\theta) & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{array}
+\right)
+\end{equation}
 
 \section {Вывод}
 
