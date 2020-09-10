@@ -37,12 +37,6 @@ Learn Computer Graphics From Scratch! ---
 \newblock ДМК Пресс, 2019. ---
 \newblock P.~370.
 
-\bibitem{bib4}
-\selectlanguageifdefined{english}
-Ray tracing. ---
-\newblock Wikipedia, 2015. \BibUrl{
-  https://en.wikipedia.org/wiki/Ray_tracing_(graphics)}.
-
 \bibitem{bib5}
 \selectlanguageifdefined{english}
 \BibEmph{Ю.М.Баяковский}. Трассировка лучей из

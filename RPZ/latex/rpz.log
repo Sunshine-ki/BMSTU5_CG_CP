@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.8)  4 SEP 2020 23:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.8)  11 SEP 2020 00:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -804,7 +804,7 @@ Package: wrapfig 2003/01/31  v 3.6
 \openout2 = `macros.inc.aux'.
 
 (./macros.inc.tex) (./rpz.aux (./1-intro.aux) (./2-analysis.aux)
-(./60-conclusion.aux) (./61-biblio.aux))
+(./3-design.aux) (./60-conclusion.aux) (./61-biblio.aux))
 \openout1 = `rpz.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -1098,7 +1098,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 185.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 185.
-<img/warnock_algorithm_example2.png, id=210, 329.23pt x 220.825pt>
+<img/warnock_algorithm_example2.png, id=230, 329.23pt x 220.825pt>
 File: img/warnock_algorithm_example2.png Graphic file (type png)
 <use img/warnock_algorithm_example2.png>
 Package pdftex.def Info: img/warnock_algorithm_example2.png  used on input line
@@ -1113,7 +1113,7 @@ Package babel Info: Redefining russian shorthand "|
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 204.
  [7 <./img/warnock_algorithm_example2.png>]
-<img/warnock_algorithm_types.png, id=223, 401.5pt x 172.645pt>
+<img/warnock_algorithm_types.png, id=243, 401.5pt x 172.645pt>
 File: img/warnock_algorithm_types.png Graphic file (type png)
 <use img/warnock_algorithm_types.png>
 Package pdftex.def Info: img/warnock_algorithm_types.png  used on input line 21
@@ -1153,7 +1153,7 @@ Package babel Info: Redefining russian shorthand "|
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 244.
  [9]
-<img/shell.png, id=243, 394.47375pt x 230.8625pt>
+<img/shell.png, id=262, 394.47375pt x 230.8625pt>
 File: img/shell.png Graphic file (type png)
 <use img/shell.png>
 Package pdftex.def Info: img/shell.png  used on input line 247.
@@ -1200,7 +1200,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 371.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 371.
-<img/move.jpg, id=264, 49.31812pt x 40.5926pt>
+<img/move.jpg, id=283, 49.31812pt x 40.5926pt>
 File: img/move.jpg Graphic file (type jpg)
 <use img/move.jpg>
 Package pdftex.def Info: img/move.jpg  used on input line 376.
@@ -1223,7 +1223,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 433.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 433.
-<img/rotate.jpg, id=275, 49.31812pt x 40.5926pt>
+<img/rotate.jpg, id=294, 49.31812pt x 40.5926pt>
 File: img/rotate.jpg Graphic file (type jpg)
 <use img/rotate.jpg>
 Package pdftex.def Info: img/rotate.jpg  used on input line 438.
@@ -1260,13 +1260,78 @@ Package babel Info: Redefining russian shorthand "|
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 41.
  [15]
-\openout2 = `60-conclusion.aux'.
+\openout2 = `3-design.aux'.
 
- (./60-conclusion.tex
+ (./3-design.tex
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 1.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 1.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 4.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 4.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 13.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 13.
+<img/block_diagram.png, id=319, 1144.275pt x 1806.75pt>
+File: img/block_diagram.png Graphic file (type png)
+<use img/block_diagram.png>
+Package pdftex.def Info: img/block_diagram.png  used on input line 19.
+(pdftex.def)             Requested size: 273.14923pt x 431.28552pt.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 29.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 29.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 29.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 29.
+
+[16
+
+
+
+ <./img/block_diagram.png>]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
+File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
+)
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 88.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 88.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 94.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 94.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 94.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 94.
+ [17])
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 42.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 42.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 42.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 42.
+ [18]
+\openout2 = `60-conclusion.aux'.
+
+
+(./60-conclusion.tex
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 1.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 1.
+<img/result.png, id=356, 1195.46625pt x 884.30376pt>
+File: img/result.png Graphic file (type png)
+<use img/result.png>
+Package pdftex.def Info: img/result.png  used on input line 7.
+(pdftex.def)             Requested size: 273.14923pt x 202.04974pt.
 )
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 50.
@@ -1276,12 +1341,11 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 50.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 50.
-
-[16
-
+ [19
 
 
-]
+
+ <./img/result.png>]
 \openout2 = `61-biblio.aux'.
 
  (./61-biblio.tex (./rpz.bbl
@@ -1301,13 +1365,13 @@ Underfull \hbox (badness 4492) in paragraph at lines 12--19
  []
 
 
-Underfull \hbox (badness 1953) in paragraph at lines 48--52
+Underfull \hbox (badness 1953) in paragraph at lines 42--46
 []\T2A/cmr/m/it/12 Ю.М.Баяковский\T2A/cmr/m/n/12 . Трассировка лучей из книги Д
 жефа Проузиса /
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 48--52
+Underfull \hbox (badness 1221) in paragraph at lines 42--46
 \T2A/cmr/m/n/12 Ю.М.Баяковский. ---  1999. [][]$\T2A/cmtt/m/n/12 https : / / ww
 w . graphicon . ru / oldgr / courses / cg99 /
  []
@@ -1321,19 +1385,19 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 52.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 52.
- [17
+ [20
 
 
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 59.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 59.
- (./rpz.aux (./1-intro.aux) (./2-analysis.aux) (./60-conclusion.aux)
-(./61-biblio.aux))
+ (./rpz.aux (./1-intro.aux) (./2-analysis.aux) (./3-design.aux)
+(./60-conclusion.aux) (./61-biblio.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 59.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 59.
 Package rerunfilecheck Info: File `rpz.out' has not changed.
-(rerunfilecheck)             Checksum: D27FD65C54980C9B1A735DBDACD2402A;4429.
+(rerunfilecheck)             Checksum: 00FC68A459CEEF4F287A047B7097CAE9;5607.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1341,13 +1405,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
- 26399 strings out of 492982
- 449315 string characters out of 6134897
- 490981 words of memory out of 5000000
- 29352 multiletter control sequences out of 15000+600000
+ 26696 strings out of 492982
+ 452751 string characters out of 6134897
+ 495071 words of memory out of 5000000
+ 29612 multiletter control sequences out of 15000+600000
  12804 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,8n,84p,1663b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,13n,84p,1663b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
@@ -1359,10 +1423,10 @@ s/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr
 /share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/t
 ype1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on rpz.pdf (17 pages, 309809 bytes).
+Output written on rpz.pdf (20 pages, 390326 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 316 compressed objects within 4 object streams
- 96 named destinations out of 1000 (max. 500000)
- 322 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 444 PDF objects out of 1000 (max. 8388607)
+ 374 compressed objects within 4 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 364 words of extra memory for PDF output out of 10000 (max. 10000000)
 

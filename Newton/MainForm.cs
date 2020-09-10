@@ -148,7 +148,7 @@ namespace Newton
 			}
 
 			if (ClosestObject == null)
-				return Color.Black;
+				return Color.White;
 
 			Colors ColorsResult = ClosestObject.Clr;
 			// TODO: Тут дальше должно быть освещение и работа с color.

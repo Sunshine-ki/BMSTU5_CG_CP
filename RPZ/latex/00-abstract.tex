@@ -12,63 +12,115 @@
 %Данный опус, как и более новые версии этого документа, можно взять по адресу (\url{https://github.com/rominf/latex-g7-32}).
 
 %\end{abstract}
-% НАЧАЛО ТИТУЛЬНОГО ЛИСТА
-\begin{center}
-	\hfill \break
-	\textit{
-		\normalsize{Государственное образовательное учреждение высшего профессионального образования}}\\ 
-	
-	\textit{
-		\normalsize  {\bf  «Московский государственный технический университет}\\ 
-		\normalsize  {\bf имени Н. Э. Баумана»}\\
-		\normalsize  {\bf (МГТУ им. Н.Э. Баумана)}\\
-	}
-	\noindent\rule{\textwidth}{2pt}
-	\hfill \break
-	\noindent
-	\makebox[0pt][l]{ФАКУЛЬТЕТ}%
-	\makebox[\textwidth][c]{«Информатика и системы управления»}%
-	\\
-	\noindent
-	\makebox[0pt][l]{КАФЕДРА}%
-	\makebox[\textwidth][r]{«Программное обеспечение ЭВМ и информационные технологии»}%
-	\\
-	\hfill\break
-	\hfill \break
-	\hfill \break
-	\hfill \break
-	\normalsize{\bf Р А С Ч Ё Т Н О - П О Я С Н И Т Е Л Ь Н А Я\space\space З А П И С К А}\\
-	\normalsize{\bf к курсовой работе на тему:}\\
-	\hfill \break
-	\large{Реализация маятника Ньютона}\\
-	\hfill \break
-	\hfill \break
-	\hfill \break
-	\hfill \break
-	\hfill \break	
-	\normalsize {
-		\noindent
-		\makebox[0pt][l]{Студент}%
-		\makebox[\textwidth][c]{}%
-		\makebox[0pt][r]{{$\underset{\text{(Подипсь, дата)}}{\underline{\hspace{6cm}}}$ \space Сукочева А.}}
-	}\\
-	\hfill \break	
-	\normalsize {
-		\noindent
-		\makebox[0pt][l]{Руководитель курсового проекта}%
-		\makebox[\textwidth][c]{ ~~~~~~~~      }%
-		\makebox[0pt][r]{{$\underset{\text{(Подпись, дата)}}{\underline{\hspace{6cm}}}$ \space Волкова Л.Л.}}
-	}
-	\hfill \break
-	\hfill \break
-	\hfill \break
-	\hfill \break
-\end{center}
-\hfill \break
-\hfill \break
-\begin{center} Москва 2020\end{center}
 
-\thispagestyle{empty} % 
+%\begin{center}
+%	\hfill \break
+%	\textit{
+%		\normalsize{Государственное образовательное учреждение высшего профессионального образования}}\\ 
+%	
+%	\textit{
+%		\normalsize  {\bf  «Московский государственный технический университет}\\ 
+%		\normalsize  {\bf имени Н. Э. Баумана»}\\
+%		\normalsize  {\bf (МГТУ им. Н.Э. Баумана)}\\
+%	}
+%	\noindent\rule{\textwidth}{2pt}
+%	\hfill \break
+%	\noindent
+%	\makebox[0pt][l]{ФАКУЛЬТЕТ}%
+%	\makebox[\textwidth][c]{«Информатика и системы управления»}%
+%	\\
+%	\noindent
+%	\makebox[0pt][l]{КАФЕДРА}%
+%	\makebox[\textwidth][r]{«Программное обеспечение ЭВМ и информационные технологии»}%
+%	\\
+%	\hfill\break
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break
+%	\normalsize{\bf Р А С Ч Ё Т Н О - П О Я С Н И Т Е Л Ь Н А Я\space\space З А П И С К А}\\
+%	\normalsize{\bf к курсовой работе на тему:}\\
+%	\hfill \break
+%	\large{Реализация маятника Ньютона}\\
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break	
+%	\normalsize {
+%		\noindent
+%		\makebox[0pt][l]{Студент}%
+%		\makebox[\textwidth][c]{}%
+%		\makebox[0pt][r]{{$\underset{\text{(Подипсь, дата)}}{\underline{\hspace{6cm}}}$ \space Сукочева А.}}
+%	}\\
+%	\hfill \break	
+%	\normalsize {
+%		\noindent
+%		\makebox[0pt][l]{Руководитель курсового проекта}%
+%		\makebox[\textwidth][c]{ ~~~~~~~~      }%
+%		\makebox[0pt][r]{{$\underset{\text{(Подпись, дата)}}{\underline{\hspace{6cm}}}$ \space Волкова Л.Л.}}
+%	}
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break
+%	\hfill \break
+%\end{center}
+%\hfill \break
+%\hfill \break
+%\begin{center} Москва 2020\end{center}
+%
+%\thispagestyle{empty} % 
+
+% НАЧАЛО ТИТУЛЬНОГО ЛИСТА
+	\noindent \begin{minipage}{0.15\textwidth}
+	\includegraphics[width=\linewidth]{img/b_logo}
+\end{minipage}
+\noindent\begin{minipage}{0.9\textwidth}\centering
+	\textbf{Министерство науки и высшего образования Российской Федерации}\\
+	\textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
+	\textbf{«Московский государственный технический университет имени Н.Э.~Баумана}\\
+	\textbf{(национальный исследовательский университет)»}\\
+	\textbf{(МГТУ им. Н.Э.~Баумана)}
+\end{minipage}
+
+\noindent\rule{18cm}{3pt}
+\newline
+\noindent ФАКУЛЬТЕТ $\underline{\text{«Информатика и системы управления»}}$ \newline
+\noindent КАФЕДРА $\underline{\text{«Программное обеспечение ЭВМ и информационные технологии»}}$\newline
+
+
+\begin{center}
+	\noindent\begin{minipage}{1.2\textwidth}\centering
+		\textbf{ ОТЧЕТ ПО ПРОИЗВОДСТВЕННОЙ ПРАКТИКЕ }\newline\newline\newline
+	\end{minipage}
+\end{center}
+
+\noindent ~~Студент $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Сукочева Алис~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$
+
+\noindent ~~Группа $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ИУ7-43Б~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$
+
+\noindent ~~Тип практики $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~стационарная~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$
+
+\noindent ~~Название предприятия $\underline{\text{~~~~~~~~МГТУ им. Н. Э. Баумана, каф. ИУ7~~~~~~~~~~~~~~~}}$\newline
+
+
+\noindent\begin{tabular}{lcc}
+	Студент: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~& $\underline{\text{~~~~~~~~~~~~~~~~}}$ & $\underline{\text{~~Сукочева А.~~}}$ \\
+	& \footnotesize подпись, дата  & \footnotesize Фамилия, И.О. \\
+	%& &  \\
+	Руководитель практики: & $\underline{\text{~~~~~~~~~~~~~~~~}}$ & $\underline{\text{~~~~Волкова Л.Л.~~~}}$ \\
+	& \footnotesize подпись, дата & \footnotesize Фамилия, И. О. \\
+\end{tabular}
+
+\noindent ~~Оценка $\underline{\text{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$
+
+
+\begin{center}
+	\vfill
+	Москва~---~\the\year
+	~г.
+\end{center}
+
+\thispagestyle{empty}
 % КОНЕЦ ТИТУЛЬНОГО ЛИСТА
 
 
