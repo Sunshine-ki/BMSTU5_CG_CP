@@ -21,21 +21,35 @@ namespace Newton
 		private List<Shape> _scene;
 		private Bitmap _img; // Содержит растровое изображение.
 		private PictureBox _imgBox; // Будет сожержать само изображение.
+		
+		private int _currImgIndex = 0;
+		private	List<Bitmap> _arrayBitmap = new List<Bitmap>();
+		 
+
+		private Mode _mode; // Off/On.
+		private State _state;
 
 		private Vector _cameraPosition;
 		private List<Light> _lights = new List<Light>();
+
+		private System.Timers.Timer _timer; // Частота кадров.
 
 		public MainForm(List<Shape> scene)
 		{
 			SettingsWindows();
 			InitializeComponent();
 			_scene = scene;
+			
+			_state = State.Start;
+			_mode = Mode.Off;
 
 			_cameraPosition = new Vector(0, 0, 0);
 
 			_lights.Add(new Light(null, 0.2, LightType.Ambient));
 			_lights.Add(new Light(new Vector(2, 1, 0), 0.6, LightType.Point));
 			_lights.Add(new Light(new Vector(1, 4, 4), 0.2, LightType.Directional));
+
+			createArrayImgBox();
 		}
 
 		#region SETTINGS
@@ -71,10 +85,74 @@ namespace Newton
 			this.Controls.Add(_imgBox);
 			_img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 			// _imgBox.Image = _img;
+
+			// Timer
+			_timer = new System.Timers.Timer(150);
+			_timer.Elapsed += OnTimedEvent;
+			// ScreenRefreshTime.Enabled = true;
 		}
 		#endregion
 
-		private void ButtonOffOnClick(object sender, System.EventArgs e) => DrawScene();
+		private void createArrayImgBox()
+		{
+			double angle = 0.04d;
+			double h = 0.23;
+			DrawScene();
+			
+			// Правый шар поднимается.
+			while (_scene[2].Center.Y < h) 
+			{
+				Console.WriteLine(_scene[2].Center.Y);
+				_scene[2].Center.RotateNegative(1.6, 5, angle);	
+				DrawScene();
+			}
+			// Правый шар опускается.
+			while (_scene[2].Center.Y - 0.2 > 0.001) 
+			{
+				Console.WriteLine(_scene[2].Center.Y);
+				_scene[2].Center.RotatePositive(1.6, 5, angle);	
+				DrawScene();
+			}
+			// Левый шар поднимается. 
+			while (_scene[0].Center.Y < h) 
+			{
+				Console.WriteLine(_scene[0].Center.Y);
+				_scene[0].Center.RotatePositive(-1.6, 5, angle);	
+				DrawScene();
+			}
+			// Левый шар опускается. 
+			while (_scene[0].Center.Y - 0.2 > 0.001) 
+			{
+				Console.WriteLine(_scene[0].Center.Y);
+				_scene[0].Center.RotateNegative(-1.6, 5, angle);	
+				DrawScene();
+			}
+		}
+
+		private void ButtonOffOnClick(object sender, System.EventArgs e)  
+		{
+			if (_mode == Mode.Off)
+			{
+				_timer.Start();
+				_mode = Mode.On;
+			}
+			else
+			{
+				_mode = Mode.Off;
+				_timer.Stop();
+			}
+		}
+
+		private void OnTimedEvent(Object source, ElapsedEventArgs e)
+		{
+			if (_currImgIndex >= _arrayBitmap.Count)
+				_currImgIndex = 0;
+
+			Console.WriteLine(_currImgIndex + "  " + _arrayBitmap.Count);
+			_imgBox.Image = _arrayBitmap[_currImgIndex];
+
+			_currImgIndex++;
+		}
 
 		private void CanvasToViewport(ref Vector point)
 		{
@@ -83,13 +161,13 @@ namespace Newton
 			point.Y = point.Y / (float)SizeObjects.HeightCanvas;
 		}
 
-		private void PutPixel(float i, float j, Color color)
+		private void PutPixel(float i, float j, Color color, Bitmap img)
 		{
 			float x = (float)SizeObjects.WidthCanvas / 2 + i;
 			float y = (float)SizeObjects.HeightCanvas / 2 - j - 1;
 			if (x < 0 || y < 0 || x >= (float)SizeObjects.WidthCanvas || y >= (float)SizeObjects.HeightCanvas)
 				return;
-			_img.SetPixel((int)x, (int)y, color);
+			img.SetPixel((int)x, (int)y, color);
 		}
 
 		public void FuncVertically(object obj)
@@ -103,42 +181,43 @@ namespace Newton
 					Vector direction = new Vector(i, j, 1);
 					CanvasToViewport(ref direction);
 					Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
-					PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B));
+					// PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), img); // TODO: img добавить в limit.
 				}
-			_imgBox.Image = _img;
 		}
 
 		private void DrawScene(int step = 150) // 8 потоков.
 		{
-			List<Thread> listThread = new List<Thread>();
+			// List<Thread> listThread = new List<Thread>();
 
-			for (int i =  -(int)SizeObjects.HeightCanvas / 2; i < (int)SizeObjects.WidthCanvas / 2; i += step)
-			{
-				listThread.Add(new Thread(new ParameterizedThreadStart(FuncVertically)));
-				listThread[listThread.Count - 1].Start(new Limit(i, i + step));
-			}
+			// for (int i =  -(int)SizeObjects.HeightCanvas / 2; i < (int)SizeObjects.WidthCanvas / 2; i += step)
+			// {
+			// 	listThread.Add(new Thread(new ParameterizedThreadStart(FuncVertically)));
+			// 	listThread[listThread.Count - 1].Start(new Limit(i, i + step));
+			// }
 
-			// Join — Это метод синхронизации, который блокирует вызывающий поток (то есть поток, который вызывает метод).
-			// Используйте этот метод, чтобы убедиться, что поток был завершен.
-			// То есть мы не пойдем далее по коду, пока что не выполнятся потоки, вызванные ранее 
-			// (то есть те потоки, которые мы джоиним.).
-			foreach (var elem in listThread)
-			{
-				elem.Join();
-			}
+			// // Join — Это метод синхронизации, который блокирует вызывающий поток (то есть поток, который вызывает метод).
+			// // Используйте этот метод, чтобы убедиться, что поток был завершен.
+			// // То есть мы не пойдем далее по коду, пока что не выполнятся потоки, вызванные ранее 
+			// // (то есть те потоки, которые мы джоиним.).
+			// foreach (var elem in listThread)
+			// {
+			// 	elem.Join();
+			// }
 
-			_imgBox.Image = _img;
+			Bitmap img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 
 
-			// for (float i = -(float)SizeObjects.WidthCanvas / 2; i < (float)SizeObjects.WidthCanvas / 2; i++)
-			// 	for (float j = -(float)SizeObjects.HeightCanvas / 2; j < (float)SizeObjects.HeightCanvas / 2; j++)
-			// 	{
+			for (float i = -(float)SizeObjects.WidthCanvas / 2; i < (float)SizeObjects.WidthCanvas / 2; i++)
+				for (float j = -(float)SizeObjects.HeightCanvas / 2; j < (float)SizeObjects.HeightCanvas / 2; j++)
+				{
 
-			// 		Vector direction = new Vector(i, j, 1);
-			// 		CanvasToViewport(ref direction);
-			// 		Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
-			// 		PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B));
-			// 	}
+					Vector direction = new Vector(i, j, 1);
+					CanvasToViewport(ref direction);
+					Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
+					PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), img);
+				}
+
+			_arrayBitmap.Add(img);
 			// _imgBox.Image = _img;
 		}
 
