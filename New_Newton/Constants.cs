@@ -31,4 +31,20 @@ namespace Newton
 		Ambient,
 		Directional
 	}
+
+	public enum Axis
+	{
+		X,
+		Y,
+		Z
+	}
+
+	public enum TypeShape
+	{
+		Shape,
+		Sphere,
+		Cylinder,
+		Triangle 
+	}
+
 }

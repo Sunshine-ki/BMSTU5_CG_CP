@@ -36,6 +36,47 @@ namespace Newton
 
 		public double DotProduct(Vector vector) => _x * vector.X + _y * vector.Y + _z * vector.Z;
 
+		public Vector CrossProduct(Vector v) // Векторное произведение.
+		{
+			return new Vector(_y * v.Z - _z * v.Y,
+							  _z * v.X - _x * v.Z, // -(_x * v.Z - _z * v.X),
+							  _x * v.Y - _y * v.X);
+		}
+
+		public Vector Sign()
+		{
+			return new Vector(Math.Sign(_x), Math.Sign(_y), Math.Sign(_z));
+		}
+
+		// Проверка на сонаправленность 
+		public bool CoDirectional(Vector v) 
+		{
+			Vector sign1 = this.Sign();
+			Vector sign2 = v.Sign();
+
+			Vector res = sign1 * sign2;
+
+			if (res.X >= 0 & res.Y >= 0 & res.Z >= 0)
+				return true;
+
+			return false;
+		}
+
+		// Получить единичный вектор.
+		public Vector Normalize()
+		{
+			return this / Length;
+		}
+
+		public void Reverse()
+		{
+			// (0 == 0) = 1
+			// (1 == 0) = 0
+			_x = Convert.ToDouble(_x == 0);
+			_y = Convert.ToDouble(_y == 0);
+			_z = Convert.ToDouble(_z == 0);
+		}
+
 		// Поворот по часовой стрелке.
 		public void RotatePositive(double xCenter, double yCenter, double angle)
 		{
