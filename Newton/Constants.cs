@@ -4,8 +4,8 @@ namespace Newton
 	{
 		WidthWindows = 1200,
 		HeightWindows = 900,
-		WidthCanvas = 1200,
-		HeightCanvas = 700
+		WidthCanvas = 1200, //600,
+		HeightCanvas = 600
 
 	}
 
@@ -24,4 +24,27 @@ namespace Newton
 		MovingDownLeft
 
 	}
+
+	public enum LightType
+	{
+		Point,
+		Ambient,
+		Directional
+	}
+
+	public enum Axis
+	{
+		X,
+		Y,
+		Z
+	}
+
+	public enum TypeShape
+	{
+		Shape,
+		Sphere,
+		Cylinder,
+		Triangle 
+	}
+
 }

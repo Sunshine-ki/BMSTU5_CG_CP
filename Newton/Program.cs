@@ -22,15 +22,32 @@ namespace Newton
 		{
 			List<Shape> scene = new List<Shape>();
 			string[] param;
-
 			foreach (string line in File.ReadLines(path))
 			{
 				param = line.Split(' ');
-				if (param.Length != 7)
+				if (param.Length < 3)
 					continue;
-				scene.Add(new Sphere(new Vector(Convert.ToDouble(param[0]),
-					Convert.ToDouble(param[1]), Convert.ToDouble(param[2])),
-					Convert.ToDouble(param[3]), new Colors(Convert.ToByte(param[4]), Convert.ToByte(param[5]), Convert.ToByte(param[6]))));
+
+				int typeObj = Convert.ToInt32(param[0]); 
+				if (typeObj == (int)TypeShape.Sphere)
+				{
+					if (param.Length != 9)
+						continue;
+					scene.Add(new Sphere(new Vector(Convert.ToDouble(param[1]),
+						Convert.ToDouble(param[2]), Convert.ToDouble(param[3])),
+						Convert.ToDouble(param[4]), new Colors(Convert.ToByte(param[5]), Convert.ToByte(param[6]), Convert.ToByte(param[7])),
+						 Convert.ToDouble(param[8]), TypeShape.Sphere));
+				}
+				else if (typeObj == (int)TypeShape.Cylinder)
+				{
+					if (param.Length != 12)
+						continue;
+					scene.Add(new Cylinder(new Vector(Convert.ToDouble(param[1]),
+						Convert.ToDouble(param[2]), Convert.ToDouble(param[3])),
+						Convert.ToDouble(param[4]), new Colors(Convert.ToByte(param[5]), Convert.ToByte(param[6]), Convert.ToByte(param[7])),
+						 Convert.ToDouble(param[8]), Convert.ToDouble(param[9]), Convert.ToDouble(param[10]), (Axis)Convert.ToDouble(param[11]),TypeShape.Cylinder));
+
+				}
 			}
 
 			return scene;
