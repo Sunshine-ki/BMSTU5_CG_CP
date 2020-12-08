@@ -270,9 +270,12 @@ namespace Newton
 
 					// Интенсивность.
 					double n_dot_l = normal.DotProduct(vec_l);
+					// Если n_dot_l < 0, то свет достигает задней части поверхности,
+					// И не вносит свой вклад в освещение рассматриваемой точки.
 					if (n_dot_l > 0)
 					{
 						// intensity += light.Intensity * n_dot_l / (length_n * vec_l.Length) / (light.Position - point).Length;
+						// Рассчет диффузного отражения.
 						intensity += light.Intensity * n_dot_l / (length_n * vec_l.Length);
 					}
 
