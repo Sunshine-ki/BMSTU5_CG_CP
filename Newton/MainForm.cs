@@ -28,7 +28,7 @@ namespace Newton
 		 
 
 		private Mode _mode; // Off/On.
-		private State _state;
+		// private State _state;
 
 		private Vector _cameraPosition;
 		private List<Light> _lights = new List<Light>();
@@ -41,7 +41,7 @@ namespace Newton
 			InitializeComponent();
 			_scene = scene;
 			
-			_state = State.Start;
+			// _state = State.Start;
 			_mode = Mode.Off;
 
 			_cameraPosition = new Vector(0, 0, 0);
