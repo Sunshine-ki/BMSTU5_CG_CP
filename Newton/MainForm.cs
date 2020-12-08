@@ -13,13 +13,14 @@ namespace Newton
 	{
 		public Int32 begin;
 		public Int32 end;
-		public Limit(Int32 begin, Int32 end) { this.begin = begin; this.end = end;}
+		public Bitmap img;
+		public Limit(Int32 begin, Int32 end, Bitmap img) { this.begin = begin; this.end = end; this.img = img; }
 	}
 
 	public class MainForm : Form
 	{
 		private List<Shape> _scene;
-		private Bitmap _img; // Содержит растровое изображение.
+		// private Bitmap _img; // Содержит растровое изображение.
 		private PictureBox _imgBox; // Будет сожержать само изображение.
 		
 		private int _currImgIndex = 0;
@@ -83,7 +84,7 @@ namespace Newton
 			_imgBox = new PictureBox();
 			_imgBox.Size = new Size((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 			this.Controls.Add(_imgBox);
-			_img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
+			// _img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 			// _imgBox.Image = _img;
 
 			// Timer
@@ -148,7 +149,7 @@ namespace Newton
 			if (_currImgIndex >= _arrayBitmap.Count)
 				_currImgIndex = 0;
 
-			Console.WriteLine(_currImgIndex + "  " + _arrayBitmap.Count);
+			// Console.WriteLine(_currImgIndex + "  " + _arrayBitmap.Count);
 			_imgBox.Image = _arrayBitmap[_currImgIndex];
 
 			_currImgIndex++;
@@ -181,43 +182,46 @@ namespace Newton
 					Vector direction = new Vector(i, j, 1);
 					CanvasToViewport(ref direction);
 					Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
-					// PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), img); // TODO: img добавить в limit.
+					PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), limit.img);
 				}
 		}
 
 		private void DrawScene(int step = 150) // 8 потоков.
 		{
-			// List<Thread> listThread = new List<Thread>();
-
-			// for (int i =  -(int)SizeObjects.HeightCanvas / 2; i < (int)SizeObjects.WidthCanvas / 2; i += step)
-			// {
-			// 	listThread.Add(new Thread(new ParameterizedThreadStart(FuncVertically)));
-			// 	listThread[listThread.Count - 1].Start(new Limit(i, i + step));
-			// }
-
-			// // Join — Это метод синхронизации, который блокирует вызывающий поток (то есть поток, который вызывает метод).
-			// // Используйте этот метод, чтобы убедиться, что поток был завершен.
-			// // То есть мы не пойдем далее по коду, пока что не выполнятся потоки, вызванные ранее 
-			// // (то есть те потоки, которые мы джоиним.).
-			// foreach (var elem in listThread)
-			// {
-			// 	elem.Join();
-			// }
-
 			Bitmap img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
 
+			List<Thread> listThread = new List<Thread>();
 
-			for (float i = -(float)SizeObjects.WidthCanvas / 2; i < (float)SizeObjects.WidthCanvas / 2; i++)
-				for (float j = -(float)SizeObjects.HeightCanvas / 2; j < (float)SizeObjects.HeightCanvas / 2; j++)
-				{
+			for (int i =  -(int)SizeObjects.HeightCanvas / 2; i < (int)SizeObjects.WidthCanvas / 2; i += step)
+			{
+				listThread.Add(new Thread(new ParameterizedThreadStart(FuncVertically)));
+				listThread[listThread.Count - 1].Start(new Limit(i, i + step, img));
+			}
 
-					Vector direction = new Vector(i, j, 1);
-					CanvasToViewport(ref direction);
-					Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
-					PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), img);
-				}
+			// Join — Это метод синхронизации, который блокирует вызывающий поток (то есть поток, который вызывает метод).
+			// Используйте этот метод, чтобы убедиться, что поток был завершен.
+			// То есть мы не пойдем далее по коду, пока что не выполнятся потоки, вызванные ранее 
+			// (то есть те потоки, которые мы джоиним.).
+			foreach (var elem in listThread)
+			{
+				elem.Join();
+			}
 
 			_arrayBitmap.Add(img);
+
+			// Bitmap img = new Bitmap((int)SizeObjects.WidthCanvas, (int)SizeObjects.HeightCanvas);
+
+			// for (float i = -(float)SizeObjects.WidthCanvas / 2; i < (float)SizeObjects.WidthCanvas / 2; i++)
+			// 	for (float j = -(float)SizeObjects.HeightCanvas / 2; j < (float)SizeObjects.HeightCanvas / 2; j++)
+			// 	{
+
+			// 		Vector direction = new Vector(i, j, 1);
+			// 		CanvasToViewport(ref direction);
+			// 		Colors c = TraceRay(_cameraPosition, direction, 1, Double.PositiveInfinity);
+			// 		PutPixel(i, j, Color.FromArgb(c.R, c.G, c.B), img);
+			// 	}
+
+			// _arrayBitmap.Add(img);
 			// _imgBox.Image = _img;
 		}
 
